@@ -1,28 +1,26 @@
 def calculate_privacy_score(emails, phones, passwords, unsafe_image=False):
     score = 0
-    reasons = []
 
-    if len(emails) > 0:
-        score = score + 20 * len(emails)
-        reasons.append("Email ID detected")
+    # 🔷 TEXT BASED SCORING
+    score += len(emails) * 10
+    score += len(phones) * 8
+    score += len(passwords) * 15
 
-    if len(phones) > 0:
-        score = score + 30 * len(phones)
-        reasons.append("Phone number detected")
-
-    if len(passwords) > 0:
-        score = score + 40 * len(passwords)
-        reasons.append("Password-like text detected")
-
+    # 🔥 IMAGE RISK (NEW)
     if unsafe_image:
-        score = score + 50
-        reasons.append("Potentially unsafe image")
+        score += 25   # strong impact
 
-    if score <= 30:
-        risk = "LOW"
-    elif score <= 70:
+    # 🔷 RISK LEVEL
+    if score >= 50:
+        risk = "HIGH"
+    elif score >= 20:
         risk = "MEDIUM"
     else:
-        risk = "HIGH"
+        risk = "LOW"
 
-    return score, risk, reasons
+    return score, risk, {
+        "emails": len(emails),
+        "phones": len(phones),
+        "passwords": len(passwords),
+        "image_risk": unsafe_image
+    }
