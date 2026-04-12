@@ -1,0 +1,215 @@
+ACADEMIC PROJECT PROPOSAL
+FACTORY MANAGEMENT SYSTEM
+
+BY
+[YOUR NAME]
+[UUCMS No.]
+
+DATE: [DD/MM/YYYY]
+
+1. TITLE OF THE PROJECT
+
+Factory Management System
+
+2. INTRODUCTION
+
+The Factory Management System (FMS) is a web-based software application designed to automate and manage all factory operations such as employee management, shift scheduling, salary processing, production tracking, inventory control, customer management, and report generation.
+
+Traditional factory management systems depend on manual records, registers, and spreadsheets which leads to data loss, errors, delays, and poor decision making.
+
+This project provides a centralized digital platform that improves productivity, transparency, and efficiency by integrating all factory activities into a single system.
+
+3. OBJECTIVES OF THE PROJECT
+
+• To automate factory operations
+• To reduce paperwork and manual errors
+• To manage employees and shifts efficiently
+• To calculate salary automatically
+• To track production shift-wise
+• To manage stock inventory
+• To handle customer & dealer details
+• To generate PDF reports
+• To support multi-branch factory management
+
+4. PROJECT CATEGORY
+
+Web Technologies / RDBMS
+
+5. TOOLS, HARDWARE & SOFTWARE REQUIREMENTS
+
+Software Requirements
+• Programming Language: Java / Python / PHP
+• Framework: Spring Boot / Django / Laravel
+• Database: MySQL / PostgreSQL
+• OS: Windows / Linux
+
+Hardware Requirements
+• Minimum 8 GB RAM
+• Intel i5 Processor or above
+• 500 GB Hard Disk
+
+6. PROBLEM DEFINITION
+
+Factories face problems like poor attendance tracking, salary miscalculation, production delays, inventory issues, and lack of proper reporting.
+
+There is no centralized system to manage shifts, salary, production, and stock efficiently.
+
+The proposed Factory Management System solves these problems by providing a secure, automated, and centralized digital platform.
+
+7. LITERATURE REVIEW / EXISTING SYSTEM
+Existing System
+
+Manual System
+• Uses registers
+• Time consuming
+• Data loss risk
+
+Excel Based System
+• Data duplication
+• No real-time update
+• Limited users
+
+Standalone Software
+• Expensive
+• Not customizable
+• No integration
+
+Research Gap
+
+Existing systems lack:
+• Real-time monitoring
+• Automation
+• Centralized reporting
+• Multi-branch support
+
+8. DETAILED REQUIREMENT SPECIFICATIONS
+A. Functional Requirements
+
+• FR1: User login & role management
+• FR2: Employee management
+• FR3: Shift scheduling
+• FR4: Working hours tracking
+• FR5: Overtime auto calculation
+• FR6: Salary auto calculation
+• FR7: Attendance tracking
+• FR8: PDF report generation
+• FR9: Production entry per shift
+• FR10: Shift-wise production dashboard
+• FR11: Stock dashboard
+• FR12: Customer & dealer management
+• FR13: Multi-branch management
+• FR14: Admin control system
+
+B. Non-Functional Requirements
+
+• Performance: Fast response
+• Security: Secure login
+• Reliability: 24/7 availability
+• Scalability: Supports multiple branches
+
+C. Technical Specifications
+
+• REST APIs
+• Relational Database
+• MVC Architecture
+
+9. PROJECT PLANNING & SCHEDULING
+
+Phases:
+• Requirement Analysis
+• System Design
+• Implementation
+• Testing
+• Deployment
+
+Gantt chart will be included.
+
+10. SYSTEM ANALYSIS
+
+Includes:
+• DFD Level 0
+• DFD Level 1
+• ER Diagram
+• Data Dictionary
+• UML Diagrams
+
+11. DATABASE DESIGN
+
+Tables:
+• Users
+• Employees
+• Attendance
+• Shifts
+• Salary
+• Production
+• Inventory
+• Customers
+• Dealers
+• Branches
+
+12. SYSTEM DESIGN
+Modules
+
+Employee Management
+
+Shift & Working Hours
+
+Salary Auto Calculation
+
+Report Export
+
+Employee History
+
+Multi-Branch Management
+
+Admin Control
+
+Production Entry per Shift
+
+Shift-wise Production Dashboard
+
+Stock Dashboard
+
+Customer & Dealer Management
+
+13. IMPLEMENTATION METHODOLOGY
+
+• MVC architecture
+• Modular coding
+• REST APIs
+• Database normalization
+• Unit testing
+
+14. REPORTS GENERATED
+
+• Attendance PDF
+• Salary PDF
+• Production Report
+• Stock Report
+• Customer Orders
+
+15. SYSTEM ARCHITECTURE
+
+Three-tier architecture:
+• Presentation Layer
+• Application Layer
+• Database Layer
+
+16. FUTURE SCOPE
+
+• Mobile app
+• IoT machine monitoring
+• AI production forecasting
+• Cloud hosting
+
+17. REFERENCES
+
+• Pressman – Software Engineering
+• Database Concepts – Silberschatz
+• IEEE Journals
+
+18. ANNEXURE
+
+• Diagrams
+• Screenshots
+• Sample DB

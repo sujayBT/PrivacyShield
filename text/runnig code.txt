@@ -1,0 +1,173 @@
+import sys
+import os
+import re
+import pytesseract
+import pdfplumber
+from pdf2image import convert_from_path
+from PIL import Image
+
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QPushButton, QLabel,
+    QFileDialog, QVBoxLayout, QFrame
+)
+from PyQt5.QtGui import QFont
+from PyQt5.QtCore import Qt
+
+from privacy_score import calculate_privacy_score
+
+# ---------- TESSERACT PATH ----------
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+# ---------- POPPLER PATH ----------
+
+POPPLER_PATH = r"C:\poppler\poppler-25.12.0\Library\bin"
+# Example alternative:
+# POPPLER_PATH = r"C:\poppler\Release-25.12.0-0\Library\bin"
+
+
+# ---------- TEXT EXTRACTION (IMAGE + PDF) ----------
+def extract_text_from_file(file_path):
+    ext = os.path.splitext(file_path)[1].lower()
+    text = ""
+
+    # IMAGE FILES
+    if ext in [".png", ".jpg", ".jpeg"]:
+        img = Image.open(file_path)
+        text = pytesseract.image_to_string(img)
+
+    # PDF FILES
+    elif ext == ".pdf":
+        # Try text-based PDF
+        with pdfplumber.open(file_path) as pdf:
+            for page in pdf.pages:
+                text += page.extract_text() or ""
+
+        # If empty → scanned PDF → OCR
+        if text.strip() == "":
+            images = convert_from_path(
+                file_path,
+                poppler_path=POPPLER_PATH
+            )
+            for img in images:
+                text += pytesseract.image_to_string(img)
+
+    return text
+
+
+# ---------- MAIN UI ----------
+class PrivacyExposureApp(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Privacy Exposure Score Tool")
+        self.setGeometry(400, 150, 520, 520)
+
+        layout = QVBoxLayout()
+        layout.setSpacing(15)
+
+        # TITLE
+        title = QLabel("Privacy Exposure Score Tool")
+        title.setFont(QFont("Arial", 18, QFont.Bold))
+        title.setAlignment(Qt.AlignCenter)
+        layout.addWidget(title)
+
+        # UPLOAD BUTTON
+        self.upload_btn = QPushButton("Upload File (Image / PDF)")
+        self.upload_btn.setFixedHeight(40)
+        self.upload_btn.setFont(QFont("Arial", 11))
+        self.upload_btn.clicked.connect(self.load_file)
+        layout.addWidget(self.upload_btn)
+
+        # SUMMARY BOX
+        box = QFrame()
+        box.setFrameShape(QFrame.Box)
+        box_layout = QVBoxLayout()
+
+        self.email_label = QLabel("Emails: 0")
+        self.phone_label = QLabel("Phones: 0")
+        self.password_label = QLabel("Passwords: 0")
+
+        for lbl in [self.email_label, self.phone_label, self.password_label]:
+            lbl.setFont(QFont("Arial", 11))
+            box_layout.addWidget(lbl)
+
+        box.setLayout(box_layout)
+        layout.addWidget(box)
+
+        # SCORE
+        self.score_label = QLabel("Score: -")
+        self.score_label.setFont(QFont("Arial", 16, QFont.Bold))
+        self.score_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(self.score_label)
+
+        # RISK
+        self.risk_label = QLabel("Risk Level: -")
+        self.risk_label.setFont(QFont("Arial", 18, QFont.Bold))
+        self.risk_label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(self.risk_label)
+
+        self.setLayout(layout)
+
+    def load_file(self):
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select File",
+            "",
+            "Supported Files (*.png *.jpg *.jpeg *.pdf)"
+        )
+
+        if not file_path:
+            return
+
+        # EXTRACT TEXT
+        text = extract_text_from_file(file_path)
+
+        # DETECTION
+        emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
+        phones = re.findall(r"\b[6-9][0-9]{9}\b", text)
+
+        raw_passwords = re.findall(r"[a-zA-Z0-9@#]{6,}", text)
+
+        ignore_words = [
+            "password", "account", "security", "change",
+            "facebook", "instagram", "whatsapp",
+            "telegram", "twitter", "gmail",
+            "english", "create", "strong"
+        ]
+
+        passwords = []
+        for pwd in raw_passwords:
+            if pwd.lower() in ignore_words:
+                continue
+            if re.search(r"[0-9@#]", pwd):
+                passwords.append(pwd)
+
+        passwords = list(set(passwords))
+
+        # SCORE
+        score, risk, _ = calculate_privacy_score(
+            emails, phones, passwords, unsafe_image=False
+        )
+
+        # UPDATE UI
+        self.email_label.setText(f"Emails: {len(emails)}")
+        self.phone_label.setText(f"Phones: {len(phones)}")
+        self.password_label.setText(f"Passwords: {len(passwords)}")
+
+        self.score_label.setText(f"Score: {score}")
+        self.risk_label.setText(f"Risk Level: {risk}")
+
+        if risk == "HIGH":
+            self.risk_label.setStyleSheet("color: red;")
+        elif risk == "MEDIUM":
+            self.risk_label.setStyleSheet("color: orange;")
+        else:
+            self.risk_label.setStyleSheet("color: green;")
+
+
+# ---------- RUN ----------
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = PrivacyExposureApp()
+    window.show()
+    sys.exit(app.exec_())

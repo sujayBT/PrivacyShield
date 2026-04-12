@@ -1,0 +1,474 @@
+WEEK 2 – SYSTEM DESIGN
+🎯 Goal of this phase
+
+👉 Convert your idea into a structured system architecture
+
+🧠 1. System Architecture (Main Design)
+
+Your system works like this:
+
+Input (Image/PDF)
+        ↓
+OCR Module
+        ↓
+Text Processing
+        ↓
+Sensitive Data Detection (Regex)
+        ↓
+Scoring Engine
+        ↓
+UI Display (Results + Score)
+🧩 2. Modules Explanation
+
+You must clearly explain each module 👇
+
+🔹 1. Input Module
+Accepts:
+Images (JPG, PNG)
+PDFs
+User uploads file through UI
+🔹 2. OCR Module
+Uses Tesseract OCR
+Converts image → text
+
+👉 Output: raw extracted text
+
+🔹 3. Text Processing Module
+Cleans extracted text
+Removes noise
+Prepares for detection
+🔹 4. Sensitive Data Detection Module
+Uses Regex
+Detects:
+phone numbers
+email IDs
+UPI IDs
+
+👉 Output: detected sensitive items
+
+🔹 5. Scoring Engine
+Calculates Privacy Exposure Score
+Based on:
+number of sensitive items
+type of data
+
+👉 Output:
+
+score (0–100)
+risk level
+🔹 6. UI Module
+Displays:
+extracted text
+detected items
+score
+📊 3. Data Flow (Important for marks)
+
+Explain like this:
+
+User uploads file
+→ System extracts text using OCR
+→ Text is processed and cleaned
+→ Sensitive data is detected using regex
+→ Score is calculated
+→ Results displayed to user
+🧠 4. Design Approach (Say this in viva)
+The system is designed using a modular approach where each component performs a specific task such as OCR, detection, scoring, and UI. This improves maintainability, scalability, and testing.
+📌 5. System Design Type
+
+You can say:
+
+👉 Layered + Modular Architecture
+
+Input Layer
+Processing Layer
+Output Layer
+📝 REPORT CONTENT (write this)
+Writing
+
+The system is designed using a modular architecture where each component performs a specific function. The system accepts input in the form of images or PDF files. The OCR module extracts text from the input using Tesseract OCR.
+
+The extracted text is processed and analyzed using regex-based detection techniques to identify sensitive information such as phone numbers, email IDs, and UPI IDs. The scoring engine calculates a privacy exposure score based on the detected data.
+
+Finally, the results are displayed to the user through a graphical user interface. This modular design improves system efficiency, maintainability, and scalability.
+
+🎤 What to SAY to faculty
+In Week 2, we focused on System Design. We divided the system into modules such as OCR, text processing, sensitive data detection, scoring engine, and UI. We designed the data flow and architecture to ensure modular and efficient processing.
+📌 What to SHOW
+Draw diagram on paper OR
+simple block diagram
+
+Example:
+
+[Input]
+   ↓
+[OCR]
+   ↓
+[Detection]
+   ↓
+[Scoring]
+   ↓
+[UI]
+💯 IMPORTANT TIP
+
+Don’t show full project yet ❌
+Only show:
+
+👉 Design + explanation
+
+🚀 Next
+
+When ready:
+
+👉 “Week 3” → I’ll give OCR + Regex explanation + report + viva answers
+
+If you want, I can also:
+
+draw clean diagram for your record
+give hand-drawing format (exam style)
+
+Just tell 👍
+===================================================
+🖼️ Image Classification
+🔹 Definition
+
+Image Classification is a technique in Artificial Intelligence and Computer Vision where a computer analyzes an image and assigns it to a specific category or label.
+
+👉 In simple words:
+It answers the question: “What is in this image?”
+
+🔹 Example
+Image of a cat → Output: “Cat” 🐱
+Image of a car → Output: “Car” 🚗
+Medical scan → Output: “Tumor” or “Normal”
+🔹 How Image Classification Works
+1. Input Image
+The system takes an image (JPG, PNG, etc.)
+2. Preprocessing
+Resize image
+Normalize pixel values
+Remove noise
+3. Feature Extraction
+Important features are detected:
+Edges
+Shapes
+Colors
+Textures
+4. Model Processing
+Uses deep learning models like:
+Convolutional Neural Networks (CNN)
+5. Classification
+Model assigns a label based on learned patterns
+🔹 Types of Image Classification
+1. Binary Classification
+Two classes only
+👉 Example: Spam / Not Spam
+2. Multi-class Classification
+More than two categories
+👉 Example: Cat, Dog, Car
+3. Multi-label Classification
+One image can have multiple labels
+👉 Example: “Dog + Person + Car”
+🔹 Applications
+📱 Face recognition
+🚗 Self-driving cars
+🏥 Medical diagnosis
+🛒 Product recognition
+🔍 Security and surveillance
+🔹 Advantages
+Fast and automatic image analysis
+High accuracy with deep learning
+Useful in many industries
+🔹 Limitations
+Needs large training data
+Can fail with poor-quality images
+Requires high computation power
+🔹 Example Workflow
+Upload image
+Model processes image
+Output → Label (e.g., “Dog”)
+🔹 Conclusion
+
+Image classification is a powerful technology that allows computers to understand visual data. It plays a major role in modern AI systems like autonomous vehicles, healthcare diagnosis, and smart applications.
+
+🔥 Simple Difference (Important for Your Project)
+Concept	What it does
+OCR	Reads text from images
+Regex	Extracts patterns from text
+Image Classification	Identifies object/category in image
+
+===========================================================================
+
+Exposure Scoring Engine
+🔹 Definition
+
+An Exposure Scoring Engine is a system that analyzes data and calculates a risk score based on how much sensitive or private information is exposed.
+
+👉 In simple words:
+It tells “how risky or exposed the data is” by giving a score.
+
+🔹 Purpose
+
+The main goal of an Exposure Scoring Engine is to:
+
+Identify sensitive information
+Measure risk level
+Help in decision-making (safe / unsafe)
+🔹 How It Works (Step-by-Step)
+1. Data Input
+Takes input from:
+OCR extracted text
+Documents
+User data
+
+👉 Example:
+
+Name: John
+Phone: 9876543210
+Aadhaar: 1234 5678 9012
+2. Data Analysis
+Uses techniques like:
+Regex (to find patterns like phone numbers, emails)
+Keyword matching (Name, DOB, ID)
+3. Sensitive Data Detection
+Identifies:
+Personal data (Name, Address)
+Confidential data (ID numbers, bank details)
+4. Risk Evaluation
+Assigns weight to each type of data:
+Data Type	Risk Level
+Name	Low
+Phone Number	Medium
+Aadhaar / ID	High
+5. Score Calculation
+Combines all risks into a final score
+
+👉 Example:
+
+Score = 85/100 → High Risk
+6. Output Result
+Displays:
+Risk score
+Risk level (Low / Medium / High)
+Highlighted sensitive data
+🔹 Example
+Input:
+Name: Rahul
+Phone: 9876543210
+Email: rahul@gmail.com
+Output:
+Detected:
+Name → Low risk
+Phone → Medium risk
+Email → Medium risk
+
+👉 Final Score: 60/100 (Medium Risk)
+
+🔹 Components of Exposure Scoring Engine
+Data Collector
+Pattern Detector (Regex)
+Risk Analyzer
+Scoring Module
+Output Interface
+🔹 Applications
+🔐 Privacy protection systems
+🏦 Banking security
+📄 Document scanning apps
+🧾 Data leakage detection
+🛡️ Cybersecurity tools
+🔹 Advantages
+Quick risk detection
+Helps protect sensitive data
+Automates security analysis
+Improves decision-making
+🔹 Limitations
+May give false positives
+Depends on correct rules/weights
+Needs proper data preprocessing
+🔹 What You Can Write in Your Project Log
+
+“The Exposure Scoring Engine analyzes extracted data and assigns a risk score based on the sensitivity of the information. It uses techniques such as pattern matching and rule-based evaluation to classify data into different risk levels and generate a final exposure score.”
+
+🔥 Simple Flow (VERY IMPORTANT for Viva)
+
+👉 OCR → Regex → Exposure Scoring Engine → Risk Score
+
+
+====================================================================
+ I can give flowchart diagram
+✅ Or Python logic for scoring engine  .not only for this for other also with good promt for each one
+
+Perfect 👍 — I’ll give you both flowcharts + Python logic + strong prompts not just for Exposure Scoring Engine, but for your full project pipeline (OCR → Regex → Classification → Scoring).
+You can directly use this in your project log + implementation 🔥
+
+🧩 1. FULL SYSTEM FLOW (MAIN FLOWCHART)
+[Start]
+   ↓
+[Input Image / Document]
+   ↓
+[OCR Engine]
+   ↓
+[Extracted Text]
+   ↓
+[Regex Processing]
+   ↓
+[Detected Sensitive Data]
+   ↓
+[Image Classification (Optional)]
+   ↓
+[Exposure Scoring Engine]
+   ↓
+[Risk Score + Level]
+   ↓
+[Display Result]
+   ↓
+[End]
+🔐 2. EXPOSURE SCORING ENGINE
+📊 Flowchart
+[Input Text]
+   ↓
+[Detect Sensitive Data]
+   ↓
+[Assign Risk Weights]
+   ↓
+[Calculate Score]
+   ↓
+[Generate Risk Level]
+   ↓
+[Output Score]
+🧠 Python Logic
+def calculate_exposure_score(data):
+    score = 0
+
+    if "phone" in data:
+        score += 20
+    if "email" in data:
+        score += 20
+    if "aadhaar" in data:
+        score += 50
+    if "name" in data:
+        score += 10
+
+    if score >= 70:
+        level = "High Risk"
+    elif score >= 40:
+        level = "Medium Risk"
+    else:
+        level = "Low Risk"
+
+    return score, level
+🎯 Prompt (for AI / report / tool)
+
+“Analyze the extracted text and identify sensitive information such as phone numbers, email addresses, and ID numbers. Assign risk weights to each type of data and compute a final exposure score along with a risk level.”
+
+🔍 3. OCR MODULE
+📊 Flowchart
+[Input Image]
+   ↓
+[Preprocessing]
+   ↓
+[Text Detection]
+   ↓
+[Character Recognition]
+   ↓
+[Output Text]
+🧠 Python Logic (Tesseract)
+import pytesseract
+from PIL import Image
+
+def extract_text(image_path):
+    img = Image.open(image_path)
+    text = pytesseract.image_to_string(img)
+    return text
+🎯 Prompt
+
+“Extract all readable text from the given image using OCR techniques and return it in structured format.”
+
+🔎 4. REGEX MODULE
+📊 Flowchart
+[Input Text]
+   ↓
+[Apply Regex Patterns]
+   ↓
+[Extract Data]
+   ↓
+[Return Structured Info]
+🧠 Python Logic
+import re
+
+def extract_sensitive_data(text):
+    phone = re.findall(r'\d{10}', text)
+    email = re.findall(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}', text)
+
+    return {
+        "phone": phone,
+        "email": email
+    }
+🎯 Prompt
+
+“Use regular expressions to extract structured information such as phone numbers, email addresses, and identification numbers from the given text.”
+
+🖼️ 5. IMAGE CLASSIFICATION MODULE
+📊 Flowchart
+[Input Image]
+   ↓
+[Preprocessing]
+   ↓
+[Model (CNN)]
+   ↓
+[Prediction]
+   ↓
+[Output Label]
+🧠 Python Logic (Basic Example)
+from tensorflow.keras.models import load_model
+import numpy as np
+import cv2
+
+def classify_image(image_path, model):
+    img = cv2.imread(image_path)
+    img = cv2.resize(img, (224, 224))
+    img = img / 255.0
+    img = np.reshape(img, (1, 224, 224, 3))
+
+    prediction = model.predict(img)
+    return prediction
+🎯 Prompt
+
+“Analyze the given image using a trained deep learning model and classify it into predefined categories based on its visual features.”
+
+🔥 6. FINAL INTEGRATION CODE (IMPORTANT)
+image = "input.jpg"
+
+# Step 1: OCR
+text = extract_text(image)
+
+# Step 2: Regex
+data = extract_sensitive_data(text)
+
+# Step 3: Exposure Score
+score, level = calculate_exposure_score(data)
+
+print("Extracted Data:", data)
+print("Score:", score)
+print("Risk Level:", level)
+🧠 Pro Tip (For Viva 💯)
+
+👉 Say this line:
+
+“Our system integrates OCR for text extraction, Regex for pattern detection, and an Exposure Scoring Engine to evaluate data sensitivity and generate a risk score.”
+
+🚀 If You Want Next Level
+
+I can also:
+✅ Convert this into PPT (with diagrams)
+✅ Add UI (dark mode app like you wanted earlier)
+✅ Fix your current project code errors
+✅ Make it fully working end-to-end project
+
+Just tell me 👍
+=================================================================================
+
+
+
+
+
+
