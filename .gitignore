@@ -1,5 +1,6 @@
 tf_env/
 __pycache__/
-build/
-dist/
-.vscode/
+*.pyc
+Pimage/
+test_*.py
+blur_engine.py
