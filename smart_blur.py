@@ -1,38 +1,39 @@
 import cv2
 import pytesseract
-from PIL import Image
-import pytesseract
+import re
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 def blur_sensitive_data(image_path):
     img = cv2.imread(image_path)
-    h, w, _ = img.shape
 
-    # OCR with bounding boxes
+    if img is None:
+        raise Exception("Image not found")
+
     data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
 
-    for i in range(len(data["text"])):
-        word = data["text"][i]
-        conf = int(data["conf"][i])
+    sensitive_patterns = [
+        r"\S+@\S+",                      # email
+        r"\b[6-9][0-9]{9}\b",            # phone
+        r"[a-zA-Z0-9@#]{6,}"             # password
+    ]
 
-        # detect sensitive patterns
-        if conf > 60 and (
-            any(char.isdigit() for char in word) or
-            "@" in word or
-            len(word) >= 6
-        ):
-            x = data["left"][i]
-            y = data["top"][i]
-            width = data["width"][i]
-            height = data["height"][i]
+    for i in range(len(data['text'])):
+        word = data['text'][i].strip()
 
-            roi = img[y:y+height, x:x+width]
+        if word == "":
+            continue
 
-            # blur region
-            roi = cv2.GaussianBlur(roi, (51, 51), 30)
+        for pattern in sensitive_patterns:
+            if re.search(pattern, word):   # 🔥 FIX: search instead of fullmatch
 
-            img[y:y+height, x:x+width] = roi
+                x = data['left'][i]
+                y = data['top'][i]
+                w = data['width'][i]
+                h = data['height'][i]
+
+                roi = img[y:y+h, x:x+w]
+                blurred = cv2.GaussianBlur(roi, (51, 51), 30)
+                img[y:y+h, x:x+w] = blurred
 
     output_path = "smart_blurred.png"
     cv2.imwrite(output_path, img)
