@@ -1,6 +1,92 @@
+# Python and Environments
 tf_env/
+venv/
+env/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Node.js
+node_modules/
+dist/
+dist_release/
+build/
+backend_dist/
+build_backend/
+build_updater/
+
+# Logs and Databases
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# Build Artifacts & Archives
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar.gz
+*.rar
+win-unpacked/
+
+# App Data & User Uploads
+uploads/
+reports/
+screenshots/
+dev_data/
+scratch/
+test_images/
+extracted_friend_images/
+ref_images/
+_odt_inspect/
+samples/
+text/
 Pimage/
+
+# Auto-Generated Project Documents (Ignore Word/PDF)
+*.docx
+~$*.docx
+*.pdf
+*.txt
+!requirements.txt
+!README.md
+
+# Scratch/Generator Scripts
+generate_*.py
+scratch_*.py
 test_*.py
-blur_engine.py
+inspect_*.py
+fix_*.py
+read_*.py
+merge_*.py
+format_*.py
+check_*.py
+append_batch_*.py
+create_*.py
+update_*.py
+apply_format_*.py
+add_table_header.py
+copy_format.py
+recreate_*.py
+final_ppt_reedit.py
+verify_models.py
+profile_script.py
+list_files.py
+search_page_numbers.py
+patch_ai_detection.py
+
+# HTML reports
+*.html
+
+# OS and IDE
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env

@@ -1,0 +1,82 @@
+{
+  "name": "privacyshield",
+  "version": "1.1.0",
+  "description": "PrivacyShield - Privacy Exposure Analysis Tool",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start":     "electron .",
+    "build":     "electron-builder --win --x64",
+    "build:dir": "electron-builder --win --x64 --dir"
+  },
+  "build": {
+    "appId": "com.privacyshield.app",
+    "productName": "PrivacyShield",
+    "copyright": "Copyright © 2026 PrivacyShield",
+    "directories": {
+      "output":          "../dist_release",
+      "buildResources":  "assets"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "assets/**"
+    ],
+    "extraResources": [
+      {
+        "from":   "../backend_dist/backend",
+        "to":     "backend",
+        "filter": ["**/*"]
+      },
+      {
+        "from":   "../frontend/dist",
+        "to":     "frontend",
+        "filter": ["**/*"]
+      },
+      {
+        "from": "../dist/updater.exe",
+        "to":   "updater.exe"
+      },
+      {
+        "from": "../version.json",
+        "to":   "version.json"
+      },
+      {
+        "from": "assets/icon.ico",
+        "to":   "icon.ico"
+      },
+      {
+        "from": "assets/tray16.png",
+        "to":   "tray16.png"
+      }
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick":                        false,
+      "perMachine":                      false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon":                   "assets/icon.ico",
+      "uninstallerIcon":                 "assets/icon.ico",
+      "createDesktopShortcut":           true,
+      "createStartMenuShortcut":         true,
+      "shortcutName":                    "PrivacyShield",
+      "runAfterFinish":                  true,
+      "uninstallDisplayName":            "PrivacyShield",
+      "license":                         "assets/license.txt"
+    },
+    "publish": {
+      "provider": "github",
+      "owner":    "YOUR_GITHUB_USERNAME",
+      "repo":     "PrivacyShield"
+    }
+  },
+  "devDependencies": {
+    "electron":         "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

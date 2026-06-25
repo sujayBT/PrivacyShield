@@ -1,0 +1,15 @@
+digraph {
+	bgcolor=white fontname="Times-Roman" rankdir=TB
+	rankdir=LR
+	U [label="Registered User" color=black fillcolor=white fontname="Times-Roman" fontsize=12 shape=box style=solid]
+	S [label="Privacy Exposure
+Score Tool (0.0)" color=black fillcolor=white fontname="Times-Roman" fontsize=12 shape=circle style=solid]
+	D [label="Local Filesystem" color=black fillcolor=white fontname="Times-Roman" fontsize=12 shape=box style=solid]
+	W [label="Web & Cloud" color=black fillcolor=white fontname="Times-Roman" fontsize=12 shape=box style=solid]
+	U -> S [label="Uploads files, URLs,
+Social profiles" color=black fontname="Times-Roman" fontsize=10]
+	S -> U [label="Privacy Score, PDF Reports,
+Blurred Images, Alerts" color=black fontname="Times-Roman" fontsize=10]
+	D -> S [label="Read background folders" color=black fontname="Times-Roman" fontsize=10]
+	S -> W [label="Fetch URL & Social Data" color=black fontname="Times-Roman" fontsize=10]
+}
